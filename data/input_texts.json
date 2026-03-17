@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "text": "Our team discussed the first AI agent prototype today. We agreed to finish a basic version in two weeks. The prototype should summarize documents and extract action items."
+  },
+  {
+    "id": 2,
+    "text": "Please update the sales dashboard before Friday and send the draft report to the manager."
+  },
+  {
+    "id": 3,
+    "text": "AI agents can use tools, structured outputs, and workflows to solve tasks."
+  },
+  {
+    "id": 4,
+    "text": "hello"
+  }
+]
