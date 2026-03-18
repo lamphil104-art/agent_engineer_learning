@@ -1,0 +1,10 @@
+AI agents are systems that use language models, tools, and workflows to solve tasks. 
+Unlike simple chatbots, they can choose actions, use external tools, and produce structured outputs.
+
+Retrieval-Augmented Generation, or RAG, helps AI systems answer questions using external knowledge. 
+Instead of depending only on the model's internal knowledge, the system first retrieves relevant text from documents.
+
+Chunking is a key step in RAG. Long documents should be split into smaller chunks so retrieval can find the most relevant pieces. 
+If chunks are too small, they lose context. If they are too large, they may contain too much irrelevant information.
+
+Good chunking improves retrieval quality and helps the model generate better answers.
