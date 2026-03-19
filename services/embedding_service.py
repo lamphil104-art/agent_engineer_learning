@@ -1,15 +1,38 @@
+import os
 from typing import List
+from dotenv import load_dotenv
+from google import genai
+
+load_dotenv()
 
 
-def mock_embed_text(text: str) -> List[float]:
-    text_lower = text.lower()
+def get_genai_client():
+    api_key = os.getenv("GEMINI_API_KEY")
+    if not api_key:
+        raise ValueError("Không tìm thấy GEMINI_API_KEY trong file .env")
 
-    score_ai = 1.0 if any(word in text_lower for word in ["ai", "agent", "model", "tool"]) else 0.1
-    score_rag = 1.0 if any(word in text_lower for word in ["rag", "retrieve", "knowledge", "document", "chunk"]) else 0.1
-    score_other = 1.0 if any(word in text_lower for word in ["banana", "fruit", "yellow"]) else 0.1
-
-    return [score_ai, score_rag, score_other]
+    return genai.Client(api_key=api_key)
 
 
-def embed_texts(texts: List[str]) -> List[List[float]]:
-    return [mock_embed_text(text) for text in texts]
+def embed_text(text: str, model: str = "gemini-embedding-001") -> List[float]:
+    if not text.strip():
+        raise ValueError("Text để embed không được rỗng.")
+
+    client = get_genai_client()
+
+    response = client.models.embed_content(
+        model=model,
+        contents=text,
+    )
+
+    return response.embeddings[0].values
+
+
+def embed_texts(texts: List[str], model: str = "gemini-embedding-001") -> List[List[float]]:
+    vectors = []
+
+    for text in texts:
+        vector = embed_text(text, model=model)
+        vectors.append(vector)
+
+    return vectors
